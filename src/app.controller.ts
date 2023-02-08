@@ -23,9 +23,20 @@ export class AppController {
     return await alkalmazottRepo
     .createQueryBuilder()
     .where('hivatalosEmail LIKE :email', { email: '%' + email + '%' })
-    .getManyAndCount();
+    .addOrderBy('kezdoDatum', 'DESC')
+    .getMany();
 
     //return await alkalmazottRepo.findOneByOrFail({ hivatalosEmail: email })
+  }
+
+  @Get('/alkalmazott/bersav')
+  async getBersav(@Query('min') min: number, @Query('max') max: number) {
+    const alkalmazottRepo = this.dataSource.getRepository(Alkalmazott)
+    return await alkalmazottRepo
+    .createQueryBuilder()
+    .where('haviBer BETWEEN :min AND :max', { min: 1000, max: 1000000 })
+    .addOrderBy('haviBer', 'ASC')
+    .getMany();
   }
 
   @Get('/alkalmazott/:id')
