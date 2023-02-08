@@ -3,6 +3,7 @@ import { Body, Controller, Get, NotFoundException, Param, Post, Query, Render } 
 import { DataSource, EntityNotFoundError } from 'typeorm';
 import Alkalmazott from './alkalmazott.entity';
 import { AppService } from './app.service';
+import NewAlkalmazottDto from './newAlkalmazott.dto';
 
 @Controller()
 export class AppController {
@@ -15,6 +16,11 @@ export class AppController {
   @Render('index')
   index() {
     return { message: 'Welcome to the homepage' };
+  }
+
+  @Post('alkalmazott')
+  async newAlkalmazott(@Body() alkalmazott: NewAlkalmazottDto) {
+    
   }
 
   @Get('/alkalmazott/search')
