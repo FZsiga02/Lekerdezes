@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { Exclude } from "class-transformer";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -9,6 +10,7 @@ export default class Alkalmazott {
   @Column()
   kezdoDatum: Date;
 
+  @Exclude()
   @Column('int')
   haviBer: number;
 
