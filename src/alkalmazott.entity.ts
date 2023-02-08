@@ -8,6 +8,16 @@ export default class Alkalmazott {
   id: number;
 
   @Column()
+  teljesNev: string;
+
+  @Exclude()
+  @Column()
+  jelszo: string;
+
+  @Column('int', {default: 0})
+  beosztottakSzama: number;
+
+  @Column()
   kezdoDatum: Date;
 
   @Exclude()
