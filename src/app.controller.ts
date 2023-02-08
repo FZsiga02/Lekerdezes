@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, NotFoundException, Param, Post, Render } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post, Query, Render } from '@nestjs/common';
 import { DataSource, EntityNotFoundError } from 'typeorm';
 import Alkalmazott from './alkalmazott.entity';
 import { AppService } from './app.service';
@@ -15,6 +15,12 @@ export class AppController {
   @Render('index')
   index() {
     return { message: 'Welcome to the homepage' };
+  }
+
+  @Get('/alkalmazott/search')
+  async searchAlkalmazott(@Query('email') email: string) {
+    const alkalmazottRepo = this.dataSource.getRepository(Alkalmazott)
+    return await alkalmazottRepo.findOneByOrFail({ hivatalosEmail: email })
   }
 
   @Get('/alkalmazott/:id')
