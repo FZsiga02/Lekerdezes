@@ -20,7 +20,12 @@ export class AppController {
 
   @Post('alkalmazott')
   async newAlkalmazott(@Body() alkalmazott: NewAlkalmazottDto) {
-    
+    const alkalmazottRepo = this.dataSource.getRepository(Alkalmazott);
+    if (alkalmazott.kezdoDatum) {
+      alkalmazott.kezdoDatum = new Date();
+    }
+    alkalmazottRepo.save(alkalmazott);
+    return alkalmazott;
   }
 
   @Get('/alkalmazott/search')
