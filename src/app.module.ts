@@ -1,5 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import Alkalmazott from './alkalmazott.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -12,7 +14,7 @@ import { AppService } from './app.service';
       password: '',
       database: 'nest_validation',
       entities: [
-        /* List of entities here */
+        Alkalmazott
       ],
       synchronize: true,
     }),
