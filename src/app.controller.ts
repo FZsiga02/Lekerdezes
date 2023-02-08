@@ -20,7 +20,12 @@ export class AppController {
   @Get('/alkalmazott/search')
   async searchAlkalmazott(@Query('email') email: string) {
     const alkalmazottRepo = this.dataSource.getRepository(Alkalmazott)
-    return await alkalmazottRepo.findOneByOrFail({ hivatalosEmail: email })
+    return await alkalmazottRepo
+    .createQueryBuilder()
+    .where('hivatalosEmail LIKE :email', { email: '%' + email + '%' })
+    .getManyAndCount();
+
+    //return await alkalmazottRepo.findOneByOrFail({ hivatalosEmail: email })
   }
 
   @Get('/alkalmazott/:id')
